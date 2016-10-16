@@ -1,10 +1,11 @@
 CACHE MANIFEST
-# Version 1
+# Version 6
 
 CACHE:
-assets/stylesheets/styles.css
 index.html
 application-cache.html
+assets/stylesheets/styles.css
+assets/javascripts/application-cache.js
 
 FALLBACK:
 assets/images/Jurassic_Park_logo.jpg assets/images/offline-fallback.jpg
