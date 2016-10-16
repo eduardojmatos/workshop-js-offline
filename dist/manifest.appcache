@@ -1,0 +1,14 @@
+CACHE MANIFEST
+# Version 1
+
+CACHE:
+assets/stylesheets/styles.css
+index.html
+application-cache.html
+
+FALLBACK:
+assets/images/Jurassic_Park_logo.jpg assets/images/offline-fallback.jpg
+
+NETWORK:
+browser-sync/browser-sync-client.js
+browser-sync/socket.io/

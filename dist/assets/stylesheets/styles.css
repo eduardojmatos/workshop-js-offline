@@ -24,6 +24,15 @@ main nav {
   background-color: #333;
 }
 
+nav ul li {
+  display: inline;
+  margin-left: 20px;
+}
+
+nav ul li:first-child {
+  margin-left: 0;
+}
+
 .offline-description {
   width: 100%:
 }
