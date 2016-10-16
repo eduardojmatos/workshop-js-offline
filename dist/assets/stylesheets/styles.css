@@ -24,25 +24,25 @@ main nav {
   background-color: #333;
 }
 
-.application-cache {
+.offline-description {
   width: 100%:
 }
 
-.application-cache header {
+.offline-description header {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.application-cache figure {
+.offline-description figure {
   width: 100%;
   display: block;
 }
 
-.application-cache figcaption {
+.offline-description figcaption {
   text-align: center;
 }
 
-.application-cache figure img {
+.offline-description figure img {
   display: block;
   margin: 0 auto;
 }
