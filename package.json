@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "Workshop of Offline JavaScript",
   "main": "index.js",
+  "repository": "https://github.com/eduardojmatos/workshop-js-offline",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "browser-sync": "browser-sync start -s 'dist' -f 'dist' --directory --cors",
+    "copy-to-dist": "cp -r ./src/* ./dist/",
+    "watch": "watch 'npm run copy-to-dist' src/ --ignoreDotFiles",
+    "dev": "npm run watch & npm run browser-sync"
   },
   "author": "Eduardo Matos <eduardoj.matos@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.17.3",
+    "watch": "^1.0.1"
+  }
 }
