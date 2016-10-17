@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="en-US" manifest="manifest.appcache">
+<html lang="en-US">
   <head>
-    <title>Application Cache | Jurassic JavaScript Park</title>
+    <title>Service Worker | Jurassic JavaScript Park</title>
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/styles.css" />
   </head>
   <body>
@@ -15,8 +15,7 @@
       </nav>
       <section class="offline-description">
         <header>
-          <h1>Offline FTW!</h1>
-          <button type="button" id="update-cache" class="button">Update cache!</button>
+          <h1>SW FTW!</h1>
         </header>
         <figure>
           <img src="assets/images/Jurassic_Park_logo.jpg" alt="Jurassic Park Logo" />
@@ -25,6 +24,6 @@
       </section>
     </main>
 
-    <script async src="assets/javascripts/application-cache.js"></script>
+    <script async src="assets/javascripts/sw-client.js"></script>
   </body>
 </html>
