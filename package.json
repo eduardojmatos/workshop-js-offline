@@ -5,15 +5,19 @@
   "main": "index.js",
   "repository": "https://github.com/eduardojmatos/workshop-js-offline",
   "scripts": {
-    "browser-sync": "browser-sync start -s 'dist' -f 'dist' --directory --cors",
-    "copy-to-dist": "cp -r ./src/* ./dist/",
-    "watch": "watch 'npm run copy-to-dist' src/ --ignoreDotFiles",
-    "dev": "npm run watch & npm run browser-sync"
+    "browser-sync": "browser-sync start -s 'dist' -f 'dist/assets/' 'dist/*.html' --directory --cors --no-open",
+    "copy:html": "rsync -av --exclude='.*' ./src/*.html ./dist/",
+    "copy:assets": "rsync -av --exclude='.*' ./src/assets/* ./dist/assets/",
+    "copy:cache": "rsync -av --exclude='.*' ./src/*.appcache ./dist/",
+    "watch:html": "sane 'npm run copy:html' src --glob='*.html'",
+    "watch:assets": "sane 'npm run copy:assets' src --glob='{assets/**/*.js,assets/**/*.css,assets/**/*.jpg}'",
+    "watch:cache": "sane 'npm run copy:cache' src --glob='*.appcache'",
+    "dev": "npm run browser-sync & npm run watch:html & npm run watch:assets & npm run watch:cache && exit 1"
   },
   "author": "Eduardo Matos <eduardoj.matos@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.17.3",
-    "watch": "^1.0.1"
+    "sane": "^1.4.1"
   }
 }
