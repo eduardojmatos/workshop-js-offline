@@ -37,6 +37,10 @@ nav ul li:first-child {
   width: 100%:
 }
 
+.offline-description header h1 {
+  margin-bottom: 15px;
+}
+
 .offline-description header {
   text-align: center;
   margin-bottom: 40px;
@@ -54,4 +58,15 @@ nav ul li:first-child {
 .offline-description figure img {
   display: block;
   margin: 0 auto;
+}
+
+.button {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fdfd56;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 0;
+  box-shadow: 0 0px 6px 1px rgba(255, 0, 0, 0.7);
 }

@@ -3,7 +3,6 @@
   <head>
     <title>Application Cache | Jurassic JavaScript Park</title>
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/styles.css" />
-    <script src="assets/javascripts/application-cache.js"></script>
   </head>
   <body>
     <main>
@@ -16,6 +15,7 @@
       <section class="offline-description">
         <header>
           <h1>Offline FTW!</h1>
+          <button type="button" id="update-cache" class="button">Update cache!</button>
         </header>
         <figure>
           <img src="assets/images/Jurassic_Park_logo.jpg" alt="Jurassic Park Logo" />
@@ -23,5 +23,7 @@
         </figure>
       </section>
     </main>
+
+    <script async src="assets/javascripts/application-cache.js"></script>
   </body>
 </html>
