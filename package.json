@@ -5,14 +5,16 @@
   "main": "index.js",
   "repository": "https://github.com/eduardojmatos/workshop-js-offline",
   "scripts": {
-    "browser-sync": "browser-sync start -s 'dist' -f 'dist/assets/' 'dist/*.html' --directory --cors --no-open",
+    "browser-sync": "browser-sync start -s 'dist' -f 'dist/assets/' 'dist/*.html' 'dist/sw.js' --directory --cors --no-open",
     "copy:html": "rsync -av --exclude='.*' ./src/*.html ./dist/",
     "copy:assets": "rsync -av --exclude='.*' ./src/assets/* ./dist/assets/",
     "copy:cache": "rsync -av --exclude='.*' ./src/*.appcache ./dist/",
+    "copy:sw": "cp ./src/sw.js ./dist/",
     "watch:html": "sane 'npm run copy:html' src --glob='*.html'",
     "watch:assets": "sane 'npm run copy:assets' src --glob='{assets/**/*.js,assets/**/*.css,assets/**/*.jpg}'",
     "watch:cache": "sane 'npm run copy:cache' src --glob='*.appcache'",
-    "dev": "npm run browser-sync & npm run watch:html & npm run watch:assets & npm run watch:cache && exit 1"
+    "watch:sw": "sane 'npm run copy:sw' src --glob='sw.js'",
+    "dev": "npm run browser-sync & npm run watch:html & npm run watch:assets & npm run watch:cache & npm run watch:sw && exit 1"
   },
   "author": "Eduardo Matos <eduardoj.matos@gmail.com>",
   "license": "MIT",
