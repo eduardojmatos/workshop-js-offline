@@ -116,3 +116,9 @@ nav ul li:first-child {
   color: #fff;
   text-transform: uppercase;
 }
+
+@media screen and (min-width: 768px) {
+  .section-form {
+    max-width: 60%
+  }
+}
