@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Garlic | Jurassic JavaScript Park</title>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/styles.css" />
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="assets/javascripts/garlic.min.js" async></script>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./application-cache.html">Application Cache</a></li>
+          <li><a href="./service-worker.html">Service Worker</a></li>
+          <li><a href="./garlic.html">Garlic</a></li>
+        </ul>
+      </nav>
+      <section class="offline-description">
+        <header>
+          <h1>Form to Enter on Jurassic Park</h1>
+        </header>
+        <figure>
+          <img src="assets/images/Jurassic_Park_logo.jpg" alt="Jurassic Park Logo" />
+          <figcaption>Jurassic Park Logo</figcaption>
+        </figure>
+      </section>
+      <section class="section-form">
+        <form action="#" method="post" class="form" data-persist="garlic">
+          <fieldset>
+            <legend>Personal Data</legend>
+
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" value="" />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" value="" />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="phone" name="phone" id="phone" value="" />
+            </div>
+
+            <div class="form-group actions">
+              <button type="submit">Send</button>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
