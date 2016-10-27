@@ -27,42 +27,15 @@ self.addEventListener('fetch', (event) => {
       return Promise.resolve(response.clone());
     }).catch((error) => {
       console.error('Fetching failed:', error);
-      return error;
+      return Promise.reject(error);
     })
   );
 });
 
-//self.addEventListener('fetch', event => {
-//  console.log('Fech received request URL =>', event.request.url);
-
-//  event.respondWith(
-//    caches.open(CURRENT_CACHES.ondemand).then(cache => {
-//      return cache.match(event.request);
-//    }).catch(err => {
-//      throw new Error(`Cache ${CURRENT_CACHES.ondemand} is empty`);
-//    })
-//  );
-
-//  event.waitUntil(
-//    caches.open(CURRENT_CACHES.ondemand).then(cache => {
-//      if (!isASafeURL(event.request.url) || !isASafeRequest(event.request)) return;
-
-//      return fetch(event.request).then(response => {
-//        return cache.put(event.request, response.clone()).then(() => {
-//          return response;
-//        });
-//      }).catch(err => {
-//        console.error('Oops... we cant connect with the server...', err);
-//      });
-//    })
-//  );
-//});
-
 const isASafeURL = (url) => {
  if (
      url.startsWith('chrome-extension') ||
-     !url.match(location.origin) ||
-     url.match(/browser-sync/g)
+     !url.match(location.origin)
     ) {
    return false;
  }
