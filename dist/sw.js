@@ -1,70 +1,79 @@
 const CACHE_VERSION = 1;
 const CURRENT_CACHES = {
-  prefetch: 'window-cache-v' + CACHE_VERSION
+  ondemand: 'ondemand-v' + CACHE_VERSION
 };
 
 self.addEventListener('install', event => {
   self.skipWaiting();
-
-  let urlsToPrefetch = [
-    './',
-    './index.html',
-    './service-worker.html',
-    './assets/stylesheets/styles.css',
-    './assets/javascripts/sw-client.js',
-    './assets/images/Jurassic_Park_logo.jpg',
-    './assets/images/offline-fallback.jpg'
-  ];
-
-  caches.open(CURRENT_CACHES.prefetch).then(cache => {
-    return cache.addAll(urlsToPrefetch).catch(error => {
-      console.log('Prefetching fails', error);
-    });
-  });
 });
 
 self.addEventListener('activate', event => {
-  console.log('activate');
+  event.waitUntil(self.clients.claim());
 });
 
-self.addEventListener('fetch', event => {
-  if (event.request.url.match(/Jurassic_Park_logo/g) && !navigator.onLine) {
-    let fallbackImage = new Request('./assets/images/offline-fallback.jpg');
+self.addEventListener('fetch', (event) => {
+  console.info(':::: Handling fetch event for', event.request.url);
 
-    event.respondWith(
-      caches.match(fallbackImage).then(response => {
-        return response;
-      }).catch(err => {
-        console.error(err);
-        fetch('./assets/images/offline-fallback.jpg').then(response => {
-          return response;
-        }).catch(function(err) {
-          console.error('Match on cache failed', err);
-        });
-      })
-    );
-  } else {
-    event.respondWith(
-      caches.match(event.request).then(function(response) {
-        if (!response) return null;
+  event.respondWith(
+    fetch(event.request).then((response) => {
+      if (!response) throw new Error('It\'s imposible');
 
-        var URL = response.url;
+      if (!isASafeURL(event.request.url) || !isASafeRequest(event.request)) return response;
 
-        if (!URL) return response;
+      caches.open(CURRENT_CACHES.ondemand).then((cache) => {
+        return cache.put(event.request, response.clone()).then(() => response);
+      });
 
-        if ( !URL.match(/sw.js/g) && URL.match(location.host) ) {
-          caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
-            return cache.put(event.request, response.clone());
-          });
-        }
+      return Promise.resolve(response.clone());
+    }).catch((error) => {
+      console.error('Fetching failed:', error);
+      return error;
+    })
+  );
+});
 
-        return response || fetch(event.request);
-      }).catch(function(err) {
-        console.error('Match on cache failed', err);
-        return fetch(event.request).catch((err) => {
-          console.error('Fetch is not possible at moment', err);
-        });
-      })
-    );
+//self.addEventListener('fetch', event => {
+//  console.log('Fech received request URL =>', event.request.url);
+
+//  event.respondWith(
+//    caches.open(CURRENT_CACHES.ondemand).then(cache => {
+//      return cache.match(event.request);
+//    }).catch(err => {
+//      throw new Error(`Cache ${CURRENT_CACHES.ondemand} is empty`);
+//    })
+//  );
+
+//  event.waitUntil(
+//    caches.open(CURRENT_CACHES.ondemand).then(cache => {
+//      if (!isASafeURL(event.request.url) || !isASafeRequest(event.request)) return;
+
+//      return fetch(event.request).then(response => {
+//        return cache.put(event.request, response.clone()).then(() => {
+//          return response;
+//        });
+//      }).catch(err => {
+//        console.error('Oops... we cant connect with the server...', err);
+//      });
+//    })
+//  );
+//});
+
+const isASafeURL = (url) => {
+ if (
+     url.startsWith('chrome-extension') ||
+     !url.match(location.origin) ||
+     url.match(/browser-sync/g)
+    ) {
+   return false;
+ }
+
+ return true;
+}
+
+const isASafeRequest = (request) => {
+  if ( request.method !== 'GET' ) {
+    return false;
   }
-});
+
+  return true;
+}
