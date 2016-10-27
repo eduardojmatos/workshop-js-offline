@@ -6,21 +6,24 @@
   "repository": "https://github.com/eduardojmatos/workshop-js-offline",
   "scripts": {
     "server": "lt --port 3000 & http-server dist -p 3000",
-    "copy:html": "rsync -av --exclude='.*' ./src/*.html ./dist/",
-    "copy:assets": "rsync -av --exclude='.*' ./src/assets/* ./dist/assets/",
-    "copy:cache": "rsync -av --exclude='.*' ./src/*.appcache ./dist/",
+    "copy:html": "rsync -arv --exclude='.*' ./src/*.html ./dist/",
+    "copy:assets": "rsync -arv --exclude='.*' ./src/assets/* ./dist/assets/",
+    "copy:cache": "rsync -arv --exclude='.*' ./src/*.appcache ./dist/",
     "copy:sw": "cp ./src/sw.js ./dist/",
+    "copy:garlic": "cp ./node_modules/drmonty-garlicjs/js/garlic.min.js ./dist/assets/javascripts/",
     "watch:html": "sane 'npm run copy:html' src --glob='*.html'",
     "watch:assets": "sane 'npm run copy:assets' src --glob='{assets/**/*.js,assets/**/*.css,assets/**/*.jpg}'",
     "watch:cache": "sane 'npm run copy:cache' src --glob='*.appcache'",
     "watch:sw": "sane 'npm run copy:sw' src --glob='sw.js'",
-    "dev": "npm run server && npm run watch:html && npm run watch:assets && npm run watch:cache && npm run watch:sw && exit 1"
+    "dev": "npm-run-all --parallel 'server' 'watch:*' 'copy:*'"
   },
   "author": "Eduardo Matos <eduardoj.matos@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "drmonty-garlicjs": "^1.2.3",
     "http-server": "^0.9.0",
     "localtunnel": "^1.8.1",
+    "npm-run-all": "^3.1.1",
     "sane": "^1.4.1"
   }
 }
