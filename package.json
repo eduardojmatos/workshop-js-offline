@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/eduardojmatos/workshop-js-offline",
   "scripts": {
-    "browser-sync": "browser-sync start -s 'dist' -f 'dist/assets/' 'dist/*.html' 'dist/sw.js' --directory --cors --no-open",
+    "server": "lt --port 3000 & http-server dist -p 3000",
     "copy:html": "rsync -av --exclude='.*' ./src/*.html ./dist/",
     "copy:assets": "rsync -av --exclude='.*' ./src/assets/* ./dist/assets/",
     "copy:cache": "rsync -av --exclude='.*' ./src/*.appcache ./dist/",
@@ -14,12 +14,13 @@
     "watch:assets": "sane 'npm run copy:assets' src --glob='{assets/**/*.js,assets/**/*.css,assets/**/*.jpg}'",
     "watch:cache": "sane 'npm run copy:cache' src --glob='*.appcache'",
     "watch:sw": "sane 'npm run copy:sw' src --glob='sw.js'",
-    "dev": "npm run browser-sync & npm run watch:html & npm run watch:assets & npm run watch:cache & npm run watch:sw && exit 1"
+    "dev": "npm run server && npm run watch:html && npm run watch:assets && npm run watch:cache && npm run watch:sw && exit 1"
   },
   "author": "Eduardo Matos <eduardoj.matos@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.17.3",
+    "http-server": "^0.9.0",
+    "localtunnel": "^1.8.1",
     "sane": "^1.4.1"
   }
 }
