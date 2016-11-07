@@ -15,7 +15,7 @@
     "watch:assets": "sane 'npm run copy:assets' src --glob='{assets/**/*.js,assets/**/*.css,assets/**/*.jpg}'",
     "watch:cache": "sane 'npm run copy:cache' src --glob='*.appcache'",
     "watch:sw": "sane 'npm run copy:sw' src --glob='sw.js'",
-    "dev": "npm-run-all --parallel 'server' 'watch:*' 'copy:*'"
+    "dev": "npm-run-all -p server watch:html watch:assets watch:cache watch:sw"
   },
   "author": "Eduardo Matos <eduardoj.matos@gmail.com>",
   "license": "MIT",
