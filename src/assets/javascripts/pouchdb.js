@@ -1,6 +1,5 @@
 (function () {
   var dinoDB = new PouchDB('dino_db2');
-  var remoteCouch = false;
 
   var form = document.querySelector('.form');
   var submitButton = form.querySelector('button[type="submit"]');
@@ -25,7 +24,7 @@
     });
 
     // Calling method that adds a Dino to DB
-    addDino(nameEl.value, emailEl.value, isVeg, function(success, error) {
+    addDino(nameEl.value, emailEl.value, isVeg, function(error, success) {
 
       // enable button again
       submitButton.disabled = false;
